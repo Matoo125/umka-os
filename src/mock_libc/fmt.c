@@ -671,20 +671,28 @@ size_t fmtvprintf(RWStream *s, const char *fmt, va_list ap) {
         switch (length) {
         case XHH:
           *va_arg(ap, signed char *) = s->tell(s) - start;
+          break;
         case XH:
           *va_arg(ap, short *) = s->tell(s) - start;
+          break;
         case XL:
           *va_arg(ap, long *) = s->tell(s) - start;
+          break;
         case XLL:
           *va_arg(ap, long long *) = s->tell(s) - start;
+          break;
         case XJ:
           *va_arg(ap, intmax_t *) = s->tell(s) - start;
+          break;
         case XZ:
           *va_arg(ap, size_t *) = s->tell(s) - start;
+          break;
         case XT:
           *va_arg(ap, ptrdiff_t *) = s->tell(s) - start;
+          break;
         default:
           *va_arg(ap, int *) = s->tell(s) - start;
+          break;
         }
 
         if (leftjustify)

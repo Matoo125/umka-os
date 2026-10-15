@@ -200,5 +200,25 @@ int main() {
   // printf("`%s`\n", buf);
   assert(strcmp(buf, "123.456 123.45600 123 0x0000c001 00123 Hell") == 0);
 
+  // Test %n with length modifiers
+  rw1 = rwStreamMkStrS(buf, 1024);
+  signed char sc = 0;
+  short sh = 0;
+  long l = 0;
+  long long ll = 0;
+  intmax_t im = 0;
+  size_t sz = 0;
+  ptrdiff_t pt = 0;
+  fmtprintf(&rw1, "a%hhnb%hnc%lnd%llne%jnf%zng%tnh%s", &sc, &sh, &l, &ll, &im, &sz, &pt, "end");
+  assert(strcmp(buf, "abcdefghend") == 0);
+  assert(sc == 1);
+  assert(sh == 2);
+  assert(l == 3);
+  assert(ll == 4);
+  assert(im == 5);
+  assert(sz == 6);
+  assert(pt == 7);
+  printf("OK N MODIFIERS\n");
+
   printf("OK FORMAT");
 }
